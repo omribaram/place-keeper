@@ -55,6 +55,7 @@ function applyPrefs() {
     const { startLocation = 1 } = user
     document.querySelector('[name="start-location"]').value =
       typeof startLocation === 'object' ? `${startLocation.lat},${startLocation.lng}` : document.querySelector(`[data-value="${startLocation}"]`)?.value
+    document.querySelector('[name="start-option"]').value = startLocation
   }
 }
 
