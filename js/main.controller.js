@@ -44,18 +44,18 @@ function applyPrefs() {
   if (user) {
     document.body.style.backgroundColor = user.bgColor
     document.body.style.color = user.txtColor
-  }
 
-  if (window.location.pathname.includes('user-prefs')) {
-    document.querySelector('[name="first-name"]').value = user?.firstName || ''
-    document.querySelector('[name="bg-color"]').value = user?.bgColor || '#f1f1f1'
-    document.querySelector('[name="txt-color"]').value = user?.txtColor || '#212529'
-    document.querySelector('[name="zoom-factor"]').value = user?.zoomFactor || 16
-    document.querySelector('.zoom-factor').innerText = user?.zoomFactor || 16
-    const { startLocation = 1 } = user
-    document.querySelector('[name="start-location"]').value =
-      typeof startLocation === 'object' ? `${startLocation.lat},${startLocation.lng}` : document.querySelector(`[data-value="${startLocation}"]`)?.value
-    document.querySelector('[name="start-option"]').value = startLocation
+    if (window.location.pathname.includes('user-prefs')) {
+      document.querySelector('[name="first-name"]').value = user.firstName
+      document.querySelector('[name="bg-color"]').value = user.bgColor
+      document.querySelector('[name="txt-color"]').value = user.txtColor
+      document.querySelector('[name="zoom-factor"]').value = user.zoomFactor
+      document.querySelector('.zoom-factor').innerText = user.zoomFactor
+      const { startLocation = 1 } = user
+      document.querySelector('[name="start-location"]').value =
+        typeof startLocation === 'object' ? `${startLocation.lat},${startLocation.lng}` : document.querySelector(`[data-value="${startLocation}"]`)?.value
+      document.querySelector('[name="start-option"]').value = startLocation
+    }
   }
 }
 
@@ -69,7 +69,7 @@ function initMap() {
   const user = getUser()
 
   map = new google.maps.Map(document.querySelector('.map-container'), {
-    center: typeof user.startLocation === 'object' ? user.startLocation : { lat: 29.549, lng: 34.954 },
+    center: typeof user?.startLocation === 'object' ? user?.startLocation : { lat: 29.549, lng: 34.954 },
     zoom: user?.zoomFactor || 16,
     disableDefaultUI: true,
     zoomControl: true,
@@ -177,8 +177,8 @@ function onAddPlace(ev) {
   addPlace({ lat: +lat, lng: +lng }, name.value)
   _hideMarker()
   renderPlaces()
-  saveSelectedPlace(markers[markers.length - 1].id)
-  _renderSelectedPlace(markers[markers.length - 1].id)
+  saveSelectedPlace(markers[markers.length - 1]?.id)
+  _renderSelectedPlace(markers[markers.length - 1]?.id)
 }
 
 function onDeletePlace(id) {

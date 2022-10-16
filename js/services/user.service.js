@@ -2,7 +2,7 @@
 
 const STORAGE_KEY_USER = 'userData'
 
-let gUser = loadFromStorage(STORAGE_KEY_USER) || {}
+let gUser = loadFromStorage(STORAGE_KEY_USER)
 
 function getUser() {
   return gUser
@@ -14,6 +14,7 @@ function saveUserPrefs(user) {
 }
 
 function saveSelectedPlace(id) {
+  if (!gUser) gUser = {}
   gUser.selectedPlaceId = id
   saveToStorage(STORAGE_KEY_USER, gUser)
 }
