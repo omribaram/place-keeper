@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Place Keeper</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+
+  <body onload="onInit()">
+    <header class="main-layout">
+      <div class="title">Place Keeper</div>
+    </header>
+
+    <nav>
+      <div class="main-layout">
+        <div class="name">Welcome <span></span>!</div>
+        <ul>
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="map.html">Places</a>
+          </li>
+          <li>
+            <a class="active" href="user-prefs.html">User Prefernces</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="user-prefs">
+      <form onsubmit="onSavePrefs(event)">
+        <div class="field">
+          <label>First Name:</label>
+          <div>
+            <input name="first-name" type="input" required />
+          </div>
+        </div>
+        <div class="field">
+          <label>Background Color:</label>
+          <div>
+            <input name="bg-color" type="color" oninput="previewInput(this)" required />
+          </div>
+        </div>
+        <div class="field">
+          <label>Text Color:</label>
+          <div>
+            <input name="txt-color" type="color" oninput="previewInput(this)" required />
+          </div>
+        </div>
+        <div class="field">
+          <label>Zoom Factor:</label>
+          <div>
+            <input name="zoom-factor" type="range" min="1" max="21" step="1" oninput="previewInput(this)" />
+            <span class="zoom-factor"></span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Map Start Location:</label>
+          <div>
+            <input name="start-location" list="start-options" autocomplete="off" oninput="this.nextElementSibling.value = event.target.list.options[this.value]?.dataset.value" />
+            <input type="hidden" name="start-option" />
+            <span class="start-location">Option / own coordinates (XX,XX)</span>
+          </div>
+          <datalist id="start-options">
+            <option data-value="1" name="Current location" value="Current location"></option>
+            <option data-value="2" name="First saved location" value="First saved location"></option>
+            <option data-value="3" name="Random saved location" value="Random saved location"></option>
+            <option data-value="4" name="Last selected saved location" value="Last selected saved location"></option>
+          </datalist>
+        </div>
+        <div class="field">
+          <button type="submit">Save</button>
+        </div>
+      </form>
+    </main>
+    <div class="modal-container"></div>
+
+    <script src="js/services/storage.service.js"></script>
+    <script src="js/services/util.service.js"></script>
+    <script src="js/services/user.service.js"></script>
+    <script src="js/services/place.service.js"></script>
+    <script src="js/main.controller.js"></script>
+  </body>
+</html>
