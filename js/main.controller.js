@@ -6,7 +6,8 @@ let map,
   infoWindow
 
 function onInit() {
-  applyPrefs()
+  const user = getUser()
+  if (user) applyPrefs()
 }
 
 function onSavePrefs(ev) {
@@ -37,25 +38,20 @@ function onSavePrefs(ev) {
 }
 
 function applyPrefs() {
-  const user = getUser()
+  document.querySelector('.name span').innerText = user.firstName
+  document.body.style.backgroundColor = user.bgColor
+  document.body.style.color = user.txtColor
 
-  document.querySelector('.name span').innerText = user?.firstName || 'guest'
-
-  if (user) {
-    document.body.style.backgroundColor = user.bgColor
-    document.body.style.color = user.txtColor
-
-    if (window.location.pathname.includes('user-prefs')) {
-      document.querySelector('[name="first-name"]').value = user.firstName
-      document.querySelector('[name="bg-color"]').value = user.bgColor
-      document.querySelector('[name="txt-color"]').value = user.txtColor
-      document.querySelector('[name="zoom-factor"]').value = user.zoomFactor
-      document.querySelector('.zoom-factor').innerText = user.zoomFactor
-      const { startLocation = 1 } = user
-      document.querySelector('[name="start-location"]').value =
-        typeof startLocation === 'object' ? `${startLocation.lat},${startLocation.lng}` : document.querySelector(`[data-value="${startLocation}"]`)?.value
-      document.querySelector('[name="start-option"]').value = startLocation
-    }
+  if (window.location.pathname.includes('user-prefs')) {
+    document.querySelector('[name="first-name"]').value = user.firstName
+    document.querySelector('[name="bg-color"]').value = user.bgColor
+    document.querySelector('[name="txt-color"]').value = user.txtColor
+    document.querySelector('[name="zoom-factor"]').value = user.zoomFactor
+    document.querySelector('.zoom-factor').innerText = user.zoomFactor
+    const { startLocation = 1 } = user
+    document.querySelector('[name="start-location"]').value =
+      typeof startLocation === 'object' ? `${startLocation.lat},${startLocation.lng}` : document.querySelector(`[data-value="${startLocation}"]`)?.value
+    document.querySelector('[name="start-option"]').value = startLocation
   }
 }
 
