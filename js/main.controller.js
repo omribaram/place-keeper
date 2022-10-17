@@ -132,7 +132,6 @@ function renderMarkers() {
     })
     const contentString = `<h4 ${isRTL(place.name) ? 'class="rtl"' : ''}>${escapeHTML(place.name)}</h4>`
     const tooltip = new google.maps.InfoWindow({ content: contentString })
-    tooltip.addListener('closeclick', marker.close)
 
     marker.addListener('click', () => tooltip.open(map, marker))
     markers.push(marker)
