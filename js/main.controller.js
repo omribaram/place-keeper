@@ -80,7 +80,7 @@ function initMap() {
   }
 
   infoWindow = new google.maps.InfoWindow()
-  infoWindow.addListener('closeclick', () => _hideMarker())
+  infoWindow.addListener('closeclick', _hideMarker)
 
   marker = new google.maps.Marker({ map })
 
