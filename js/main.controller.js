@@ -98,7 +98,7 @@ function initMap() {
     addMarker(pos)
   })
 
-  locationButton.addEventListener('click', () => getUserPos())
+  locationButton.addEventListener('click', getUserPos)
 }
 
 function renderPlaces() {
