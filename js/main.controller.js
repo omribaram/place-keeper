@@ -7,7 +7,7 @@ let map,
 
 function onInit() {
   const user = getUser()
-  if (user.firstName) applyPrefs()
+  if (user?.firstName) applyPrefs()
 }
 
 function onSavePrefs(ev) {
