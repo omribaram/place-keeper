@@ -178,7 +178,7 @@ function onAddPlace(ev) {
 }
 
 function onDeletePlace(id) {
-  const deletedPlace = deletePlace(id)
+  deletePlace(id)
   renderPlaces()
   saveSelectedPlace(markers[markers.length - 1]?.id)
   _renderSelectedPlace(markers[markers.length - 1]?.id)
