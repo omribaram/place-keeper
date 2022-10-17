@@ -7,14 +7,14 @@ let map,
 
 function onInit() {
   const user = getUser()
-  if (user?.firstName) applyPrefs()
+  if (user?.firstName) applyPrefs(user)
 }
 
 function onSavePrefs(ev) {
   ev.preventDefault()
   const { elements } = ev.target
   let startLocation
-
+  
   if (+elements['start-option'].value >= 1 && +elements['start-option'].value <= 4) {
     if (+elements['start-option'].value !== 1 && !getPlaces()?.length) return _alertMsg('You have no saved locations.')
     startLocation = +elements['start-option'].value
@@ -37,7 +37,7 @@ function onSavePrefs(ev) {
   applyPrefs(user)
 }
 
-function applyPrefs() {
+function applyPrefs(user) {
   document.querySelector('.name span').innerText = user.firstName
   document.body.style.backgroundColor = user.bgColor
   document.body.style.color = user.txtColor
