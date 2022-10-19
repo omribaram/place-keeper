@@ -455,14 +455,13 @@ input[name="start-location"]:hover ~ .start-location {
 }
 
 .place .close:hover {
-    background-color: #f3f3f3;
+    background-color: #fdfdfd;
     border: 0.5px solid #c1c1c1;
 }
 
 .place .close i {
     margin-inline-end: 3px;
     font-size: 16px;
-    vertical-align: text-top;
 }
 
 .place .close > span {
