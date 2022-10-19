@@ -234,12 +234,6 @@ function _hideMarker() {
   gInfoWindow.close()
 }
 
-function _setMapOnAllMarkers() {
-  for (let i = 0; i < gMarkers.length; i++) {
-    gMarkers[i].setMap(gMap)
-  }
-}
-
 function _deleteMarkers() {
   _clearMarkers()
   gMarkers = []
@@ -247,6 +241,12 @@ function _deleteMarkers() {
 
 function _clearMarkers() {
   _setMapOnAllMarkers(null)
+}
+
+function _setMapOnAllMarkers(map = gMap) {
+  for (let i = 0; i < gMarkers.length; i++) {
+    gMarkers[i].setMap(map)
+  }
 }
 
 function _alertMsg(msg) {
