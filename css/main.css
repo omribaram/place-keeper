@@ -20,6 +20,13 @@
     box-sizing: border-box;
 }
 
+*:focus,
+*:focus-visible,
+*:focus-within,
+*:active {
+    outline: none;
+}
+
 a {
     display: block;
     padding: 0.5rem 1rem;
@@ -179,6 +186,7 @@ h4 {
     border: 1px solid #dee2e6;
     background-color: #f8f9fa;
     max-width: 900px;
+    width: 90%;
     margin-inline: auto;
 }
 
@@ -231,7 +239,6 @@ input[name="start-location"]:hover ~ .start-location {
 
 .map-places {
     display: flex;
-    width: 120%;
     padding: 1rem;
     margin-block: 1rem;
     border-radius: 0.25rem;
@@ -239,8 +246,9 @@ input[name="start-location"]:hover ~ .start-location {
     background-color: #f8f9fa;
     gap: 20px;
     max-width: 900px;
+    width: 90%;
     margin-inline: auto;
-    max-height: calc(100vh - 276px);
+    height: calc(100vh - 276px);
 }
 
 .map-places > section {
@@ -250,9 +258,7 @@ input[name="start-location"]:hover ~ .start-location {
 }
 
 .map-container {
-    width: 500px;
-    height: 650px;
-    border-radius: 5px;
+    flex-basis: 60%;
 }
 
 .map-container .my-location {
@@ -321,6 +327,7 @@ input[name="start-location"]:hover ~ .start-location {
     overflow-y: overlay;
     overflow-x: hidden;
     height: calc(100% - 80px);
+    padding-block-end: 5px;
 }
 
 .place-container .places::-webkit-scrollbar {
@@ -374,37 +381,112 @@ input[name="start-location"]:hover ~ .start-location {
     line-height: 0.7;
     transition: right 0.5s;
     opacity: 0;
+    pointer-events: none;
 }
 
 .place .name:hover::after {
-    content: "➪";
-    font-size: 30px;
+    content: "➪ Show on map";
+    font-size: 15px;
     position: absolute;
-    top: 2px;
-    right: -35px;
+    top: 7px;
+    right: -120px;
     line-height: 0.7;
     opacity: 1;
-    transition: right 0.5s, opacity 1.5s;
+    transition: right 0.5s, opacity 0.5s 0.2s;
 }
 
 .date {
     font-size: smaller;
 }
 
+.actions {
+    height: 3px;
+    width: 3px;
+    top: 18px;
+    right: 15px;
+    background-color: #a3a3a3;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    pointer-events: none;
+}
+
+.actions::before {
+    content: "";
+    height: 3px;
+    width: 3px;
+    background-color: #a3a3a3;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    top: -4px;
+}
+
+.actions::after {
+    content: "";
+    height: 3px;
+    width: 3px;
+    background-color: #a3a3a3;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    top: 4px;
+}
+
 .place .close {
     position: absolute;
-    right: 5px;
+    right: 25px;
     top: 5px;
     background: none;
     border: none;
     font-size: large;
-    color: #a3a3a3;
+    color: #747474;
+    font-size: 14px;
     cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    vertical-align: middle;
+    background-color: #f8f9fa;
+    transition: opacity 0.5s, border 0.3s;
+    padding: 0.2rem 0.75rem;
+    border: 0.5px solid #dfdfdf;
 }
 
 .place .close:hover {
-    color: #747474;
-    transition: color 0.5s;
+    background-color: #f3f3f3;
+    border: 0.5px solid #c1c1c1;
+}
+
+.place .close i {
+    margin-inline-end: 3px;
+    font-size: 16px;
+    vertical-align: text-top;
+}
+
+.place .close > span {
+    font-size: 14px;
+}
+
+.place > input[type="checkbox"]:hover ~ .actions,
+.place > input[type="checkbox"]:hover ~ .actions::before,
+.place > input[type="checkbox"]:hover ~ .actions::after {
+    background-color: #747474;
+}
+
+.place > input[type="checkbox"] {
+    position: absolute;
+    top: 10px;
+    right: 7px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.place > input[type="checkbox"]:checked ~ .close {
+    opacity: 1;
+    transition: opacity .5s, border .3s;
+    pointer-events: all;
 }
 
 .add-place {

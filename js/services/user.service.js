@@ -13,7 +13,7 @@ function saveUserPrefs(user) {
   saveToStorage(STORAGE_KEY_USER, gUser)
 }
 
-function saveSelectedPlace(id) {
+function saveSelectedPlaceId(id) {
   if (!gUser) gUser = {}
   gUser.selectedPlaceId = id
   saveToStorage(STORAGE_KEY_USER, gUser)

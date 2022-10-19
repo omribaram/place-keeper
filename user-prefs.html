@@ -41,19 +41,19 @@
         <div class="field">
           <label>Background Color:</label>
           <div>
-            <input name="bg-color" type="color" oninput="previewInput(this)" value ="#f1f1f1" required />
+            <input name="bg-color" type="color" oninput="onPreviewInput(this)" value="#f1f1f1" required />
           </div>
         </div>
         <div class="field">
           <label>Text Color:</label>
           <div>
-            <input name="txt-color" type="color" oninput="previewInput(this)" value="#212529" required />
+            <input name="txt-color" type="color" oninput="onPreviewInput(this)" value="#212529" required />
           </div>
         </div>
         <div class="field">
           <label>Zoom Factor:</label>
           <div>
-            <input name="zoom-factor" type="range" min="1" max="21" step="1" value="16" oninput="previewInput(this)" />
+            <input name="zoom-factor" type="range" min="1" max="21" step="1" value="16" oninput="onPreviewInput(this)" />
             <span class="zoom-factor">16</span>
           </div>
         </div>
@@ -62,7 +62,7 @@
           <div>
             <input name="start-location" list="start-options" autocomplete="off" oninput="this.nextElementSibling.value = event.target.list.options[this.value]?.dataset.value" />
             <input type="hidden" name="start-option" />
-            <span class="start-location">Option / own coordinates (XX,XX)</span>
+            <span class="start-location">Option / own coordinates: (-)XX,(-)XXX</span>
           </div>
           <datalist id="start-options">
             <option data-value="1" name="Current location" value="Current location"></option>
