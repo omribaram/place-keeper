@@ -130,11 +130,6 @@ nav > div {
     padding-inline-start: 15px;
 }
 
-nav .name {
-    word-break: break-word;
-    max-width: 25vw;
-}
-
 main {
     min-width: 460px;
 }
