@@ -12,24 +12,37 @@ function onInit() {
 
 function onSavePrefs(ev) {
   ev.preventDefault()
-  const { elements } = ev.target
-  let startLocation
 
-  if (+elements['start-option'].value >= 1 && +elements['start-option'].value <= 4) {
-    if (+elements['start-option'].value !== 1 && !getPlaces()?.length) return _alertMsg('You have no saved locations.')
-    startLocation = +elements['start-option'].value
+  let {
+    'first-name': firstName,
+    'bg-color': bgColor,
+    'txt-color': txtColor,
+    'zoom-factor': zoomFactor,
+    'start-location': startLocation,
+    'start-option': startOption,
+  } = Object.fromEntries(new FormData(ev.target))
+
+  zoomFactor = +zoomFactor
+  startOption = +startOption
+
+  if (startOption >= 1 && startOption <= 4) {
+    if (startOption !== 1 && !getPlaces()?.length) return _alertMsg('You have no saved locations.')
+    startLocation = startOption
   } else {
-    const [lat, lng] = elements['start-location'].value.split(',')
+    let [lat, lng] = startLocation.split(',')
+    lat = +lat
+    lng = +lng
+
     if ((!lat, !lng)) return _alertMsg('Please enter coordinates seperated by a comma: (-)XX,(-)XXX')
     if (isNaN(lat) || isNaN(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180) return _alertMsg('Please enter valid coordinates: Lat (-90 < 90) and Lng (-180 < 180).')
-    startLocation = { lat: +lat, lng: +lng }
+    startLocation = { lat, lng }
   }
 
   const user = {
-    firstName: elements['first-name'].value,
-    bgColor: elements['bg-color'].value,
-    txtColor: elements['txt-color'].value,
-    zoomFactor: +elements['zoom-factor'].value,
+    firstName,
+    bgColor,
+    txtColor,
+    zoomFactor,
     startLocation,
   }
 
@@ -82,17 +95,15 @@ function initMap() {
   locationButton.classList.add('my-location')
   locationButton.innerHTML = `<img src="img/my-location.png" />`
   gMap.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(locationButton)
+  locationButton.addEventListener('click', getUserPos)
 
   gMap.addListener('click', ({ latLng: { lat, lng } }) => {
     const pos = {
       lat: lat(),
       lng: lng(),
     }
-
     addMarker(pos)
   })
-
-  locationButton.addEventListener('click', getUserPos)
 }
 
 function renderPlaces() {
