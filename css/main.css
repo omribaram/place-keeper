@@ -53,6 +53,13 @@ body {
     overflow: hidden;
 }
 
+@media (max-width: 800px) {
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 body.rtl {
     direction: rtl;
 }
@@ -78,6 +85,16 @@ header .title {
     min-width: 460px;
 }
 
+@media (max-width: 800px) {
+    header .title {
+        font-size: clamp(49px, 10vw, 10vw);
+    }
+
+    .main-layout {
+        margin: 5px auto;
+    }
+}
+
 header .title:before,
 header .title:after {
     content: "Place Keeper";
@@ -85,7 +102,7 @@ header .title:after {
     overflow: hidden;
     left: 0;
     top: 0;
-    width: 100%;
+    margin: -1px;
 }
 
 header .title:before {
@@ -111,6 +128,11 @@ nav > div {
     justify-content: space-between;
     width: 100%;
     padding-inline-start: 15px;
+}
+
+.name {
+    word-break: break-word;
+    max-width: 25vw;
 }
 
 main {
@@ -251,6 +273,13 @@ input[name="start-location"]:hover ~ .start-location {
     height: calc(100vh - 276px);
 }
 
+@media (max-width: 800px) {
+    .map-places {
+        flex-direction: column;
+        flex-grow: 1;
+    }
+}
+
 .map-places > section {
     border: 1px solid #e1e1e1;
     padding: 0px;
@@ -259,6 +288,7 @@ input[name="start-location"]:hover ~ .start-location {
 
 .map-container {
     flex-basis: 60%;
+    min-height: 50%;
 }
 
 .map-container .my-location {
@@ -290,6 +320,7 @@ input[name="start-location"]:hover ~ .start-location {
 .place-container {
     flex-grow: 1;
     box-shadow: inset 0 0.25rem 0 rgb(136 199 255);
+    overflow: hidden;
 }
 
 .place-container .header {
@@ -484,7 +515,7 @@ input[name="start-location"]:hover ~ .start-location {
 
 .place > input[type="checkbox"]:checked ~ .close {
     opacity: 1;
-    transition: opacity .5s, border .3s;
+    transition: opacity 0.5s, border 0.3s;
     pointer-events: all;
 }
 
